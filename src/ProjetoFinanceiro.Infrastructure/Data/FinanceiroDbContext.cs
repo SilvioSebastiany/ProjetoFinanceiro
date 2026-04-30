@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using ProjetoFinanceiro.Application.Data;
 using ProjetoFinanceiro.Domain.Entities;
 
 namespace ProjetoFinanceiro.Infrastructure.Data;
 
-public class FinanceiroDbContext : DbContext
+public class FinanceiroDbContext : DbContext, IFinanceiroDbContext
 {
     public FinanceiroDbContext(DbContextOptions<FinanceiroDbContext> options)
         : base(options)

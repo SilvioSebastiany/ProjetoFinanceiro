@@ -2,13 +2,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Api", "ProjetoFinanceiro.Api\ProjetoFinanceiro.Api.csproj", "{5C41656E-5F1F-9BEE-E914-FE98CC89856A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Api", "src\ProjetoFinanceiro.Api\ProjetoFinanceiro.Api.csproj", "{5C41656E-5F1F-9BEE-E914-FE98CC89856A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Application", "ProjetoFinanceiro.Application\ProjetoFinanceiro.Application.csproj", "{907EF46F-100F-DC79-5CD0-9199CED0396A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Application", "src\ProjetoFinanceiro.Application\ProjetoFinanceiro.Application.csproj", "{907EF46F-100F-DC79-5CD0-9199CED0396A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Domain", "ProjetoFinanceiro.Domain\ProjetoFinanceiro.Domain.csproj", "{A313CD01-D654-8F6D-E555-D75C050375E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Domain", "src\ProjetoFinanceiro.Domain\ProjetoFinanceiro.Domain.csproj", "{A313CD01-D654-8F6D-E555-D75C050375E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Infrastructure", "ProjetoFinanceiro.Infrastructure\ProjetoFinanceiro.Infrastructure.csproj", "{F639631D-A7EE-4AC1-7104-0C97C391FC12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoFinanceiro.Infrastructure", "src\ProjetoFinanceiro.Infrastructure\ProjetoFinanceiro.Infrastructure.csproj", "{F639631D-A7EE-4AC1-7104-0C97C391FC12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

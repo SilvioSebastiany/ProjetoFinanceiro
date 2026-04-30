@@ -10,7 +10,7 @@ public class Month
 
     public ICollection<Transaction> Transactions { get; private set; } = new List<Transaction>();
 
-    private Month() { } // EF Core
+    private Month() { } 
 
     public Month(string label)
     {

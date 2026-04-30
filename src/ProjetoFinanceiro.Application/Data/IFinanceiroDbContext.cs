@@ -9,6 +9,7 @@ public interface IFinanceiroDbContext
     DbSet<Transaction> Transactions { get; }
     DbSet<Rule> Rules { get; }
     DbSet<BoletoCategory> BoletoCategories { get; }
+    DbSet<Boleto> Boletos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

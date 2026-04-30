@@ -15,6 +15,7 @@ public class FinanceiroDbContext : DbContext, IFinanceiroDbContext
     public DbSet<Month> Months => Set<Month>();
     public DbSet<Rule> Rules => Set<Rule>();
     public DbSet<BoletoCategory> BoletoCategories => Set<BoletoCategory>();
+    public DbSet<Boleto> Boletos => Set<Boleto>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -34,6 +35,7 @@ public class FinanceiroDbContext : DbContext, IFinanceiroDbContext
             e.Property(t => t.Description).HasColumnName("Descricao");
             e.Property(t => t.Amount).HasColumnName("Valor").HasPrecision(18, 2);
             e.Property(t => t.Who).HasColumnName("Responsavel").HasConversion<int>();
+            e.Property(t => t.CardOwner).HasColumnName("Dono").HasConversion<int>();
             e.Property(t => t.MonthId).HasColumnName("MesId");
             e.Property(t => t.CreatedAt).HasColumnName("CriadoEm");
             e.HasOne<Month>()
@@ -56,6 +58,20 @@ public class FinanceiroDbContext : DbContext, IFinanceiroDbContext
             e.Property(b => b.Id).HasColumnName("Id");
             e.Property(b => b.Name).HasColumnName("Nome");
             e.Property(b => b.CreatedAt).HasColumnName("CriadoEm");
+        });
+
+        modelBuilder.Entity<Boleto>(e =>
+        {
+            e.ToTable("Boletos");
+            e.Property(b => b.Id).HasColumnName("Id");
+            e.Property(b => b.MonthId).HasColumnName("MesId");
+            e.Property(b => b.Name).HasColumnName("Nome");
+            e.Property(b => b.Amount).HasColumnName("Valor").HasPrecision(18, 2);
+            e.Property(b => b.Who).HasColumnName("Responsavel").HasConversion<int>();
+            e.Property(b => b.CreatedAt).HasColumnName("CriadoEm");
+            e.HasOne<Month>()
+                .WithMany()
+                .HasForeignKey(b => b.MonthId);
         });
     }
 }

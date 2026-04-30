@@ -1,16 +1,32 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Program",
-            "type": "node",
+            "name": "Debug API (http)",
+            "type": "coreclr",
             "request": "launch",
-            "program": "${workspaceFolder}/ProjetoFinanceiro.Api.csproj",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/ProjetoFinanceiro.Api/bin/Debug/net9.0/ProjetoFinanceiro.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ProjetoFinanceiro.Api",
+            "stopAtEntry": false,
             "env": {
-                "NODE_ENV": "development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5100"
+            }
+        },
+        {
+            "name": "Debug API (https)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/ProjetoFinanceiro.Api/bin/Debug/net9.0/ProjetoFinanceiro.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/ProjetoFinanceiro.Api",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "https://localhost:7231;http://localhost:5100"
             }
         }
     ]

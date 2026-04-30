@@ -11,4 +11,5 @@ public record GetTransactionsByMonthResponse(
     string Description,
     decimal Amount,
     WhoType Who,
+    CardOwnerType CardOwner,
     DateTime CreatedAt);

@@ -26,6 +26,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
             request.Description,
             request.Amount,
             who,
+            request.CardOwner,
             request.MonthId);
 
         _db.Transactions.Add(transaction);
@@ -37,6 +38,7 @@ public class CreateTransactionCommandHandler : IRequestHandler<CreateTransaction
             transaction.Description,
             transaction.Amount,
             transaction.Who,
+            transaction.CardOwner,
             transaction.MonthId,
             transaction.CreatedAt);
     }

@@ -7,6 +7,7 @@ public record CreateTransactionCommand(
     DateOnly Date,
     string Description,
     decimal Amount,
+    CardOwnerType CardOwner,
     Guid MonthId) : IRequest<CreateTransactionResponse>;
 
 public record CreateTransactionResponse(
@@ -15,5 +16,6 @@ public record CreateTransactionResponse(
     string Description,
     decimal Amount,
     WhoType Who,
+    CardOwnerType CardOwner,
     Guid MonthId,
     DateTime CreatedAt);

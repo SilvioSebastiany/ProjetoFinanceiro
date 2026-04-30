@@ -17,7 +17,7 @@ public class GetTransactionsByMonthQueryHandler : IRequestHandler<GetTransaction
     {
         return await _db.Transactions
             .Where(t => t.MonthId == request.MonthId)
-            .Select(t => new GetTransactionsByMonthResponse(t.Id, t.Date, t.Description, t.Amount, t.Who, t.CreatedAt))
+            .Select(t => new GetTransactionsByMonthResponse(t.Id, t.Date, t.Description, t.Amount, t.Who, t.CardOwner, t.CreatedAt))
             .ToListAsync(cancellationToken);
     }
 }

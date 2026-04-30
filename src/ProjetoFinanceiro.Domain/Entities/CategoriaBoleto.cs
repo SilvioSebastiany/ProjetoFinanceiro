@@ -1,11 +1,10 @@
 namespace ProjetoFinanceiro.Domain.Entities;
 
-public class Boleto
+public class CategoriaBoleto
 {
     public Guid Id { get; set; } = Guid.NewGuid();
-    public Guid MesId { get; set; }
+
     public string Nome { get; set; } = string.Empty;
-    public decimal Valor { get; set; }
-    public TipoResponsavel Responsavel { get; set; } = TipoResponsavel.Shared;
+
     public DateTime CriadoEm { get; set; } = DateTime.UtcNow;
 }

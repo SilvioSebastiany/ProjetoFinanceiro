@@ -17,23 +17,23 @@ public class CategoriasBoletosController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> BuscarTodos(CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetBoletoCategoriesQuery(), cancellationToken);
-        return Ok(result);
+        var resultado = await _mediator.Send(new BuscarCategoriasBoletoQuery(), cancellationToken);
+        return Ok(resultado);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateBoletoCategoryCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Criar(CriarCategoriaBoletoCommand command, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetAll), new { id = result.Id }, result);
+        var resultado = await _mediator.Send(command, cancellationToken);
+        return CreatedAtAction(nameof(BuscarTodos), new { id = resultado.Id }, resultado);
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Excluir(Guid id, CancellationToken cancellationToken)
     {
-        var found = await _mediator.Send(new DeleteBoletoCategoryCommand(id), cancellationToken);
-        return found ? NoContent() : NotFound();
+        var encontrado = await _mediator.Send(new ExcluirCategoriaBoletoCommand(id), cancellationToken);
+        return encontrado ? NoContent() : NotFound();
     }
 }

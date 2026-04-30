@@ -17,23 +17,23 @@ public class RegrasController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> BuscarTodos(CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetRulesQuery(), cancellationToken);
-        return Ok(result);
+        var resultado = await _mediator.Send(new BuscarRegrasQuery(), cancellationToken);
+        return Ok(resultado);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateRuleCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Criar(CriarRegraCommand command, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetAll), new { id = result.Id }, result);
+        var resultado = await _mediator.Send(command, cancellationToken);
+        return CreatedAtAction(nameof(BuscarTodos), new { id = resultado.Id }, resultado);
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Excluir(Guid id, CancellationToken cancellationToken)
     {
-        var found = await _mediator.Send(new DeleteRuleCommand(id), cancellationToken);
-        return found ? NoContent() : NotFound();
+        var encontrado = await _mediator.Send(new ExcluirRegraCommand(id), cancellationToken);
+        return encontrado ? NoContent() : NotFound();
     }
 }

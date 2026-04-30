@@ -11,67 +11,67 @@ public class FinanceiroDbContext : DbContext, IFinanceiroDbContext
     {
     }
 
-    public DbSet<Transaction> Transactions => Set<Transaction>();
-    public DbSet<Month> Months => Set<Month>();
-    public DbSet<Rule> Rules => Set<Rule>();
-    public DbSet<BoletoCategory> BoletoCategories => Set<BoletoCategory>();
+    public DbSet<Transacao> Transacoes => Set<Transacao>();
+    public DbSet<Mes> Meses => Set<Mes>();
+    public DbSet<Regra> Regras => Set<Regra>();
+    public DbSet<CategoriaBoleto> CategoriasBoleto => Set<CategoriaBoleto>();
     public DbSet<Boleto> Boletos => Set<Boleto>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Month>(e =>
+        modelBuilder.Entity<Mes>(e =>
         {
             e.ToTable("Meses");
             e.Property(m => m.Id).HasColumnName("Id");
-            e.Property(m => m.Label).HasColumnName("Rotulo");
-            e.Property(m => m.CreatedAt).HasColumnName("CriadoEm");
+            e.Property(m => m.Rotulo).HasColumnName("Rotulo");
+            e.Property(m => m.CriadoEm).HasColumnName("CriadoEm");
         });
 
-        modelBuilder.Entity<Transaction>(e =>
+        modelBuilder.Entity<Transacao>(e =>
         {
             e.ToTable("Transacoes");
             e.Property(t => t.Id).HasColumnName("Id");
-            e.Property(t => t.Date).HasColumnName("Data");
-            e.Property(t => t.Description).HasColumnName("Descricao");
-            e.Property(t => t.Amount).HasColumnName("Valor").HasPrecision(18, 2);
-            e.Property(t => t.Who).HasColumnName("Responsavel").HasConversion<int>();
-            e.Property(t => t.CardOwner).HasColumnName("Dono").HasConversion<int>();
-            e.Property(t => t.MonthId).HasColumnName("MesId");
-            e.Property(t => t.CreatedAt).HasColumnName("CriadoEm");
-            e.HasOne<Month>()
-                .WithMany(m => m.Transactions)
-                .HasForeignKey(t => t.MonthId);
+            e.Property(t => t.Data).HasColumnName("Data");
+            e.Property(t => t.Descricao).HasColumnName("Descricao");
+            e.Property(t => t.Valor).HasColumnName("Valor").HasPrecision(18, 2);
+            e.Property(t => t.Responsavel).HasColumnName("Responsavel").HasConversion<int>();
+            e.Property(t => t.Dono).HasColumnName("Dono").HasConversion<int>();
+            e.Property(t => t.MesId).HasColumnName("MesId");
+            e.Property(t => t.CriadoEm).HasColumnName("CriadoEm");
+            e.HasOne<Mes>()
+                .WithMany(m => m.Transacoes)
+                .HasForeignKey(t => t.MesId);
         });
 
-        modelBuilder.Entity<Rule>(e =>
+        modelBuilder.Entity<Regra>(e =>
         {
             e.ToTable("Regras");
             e.Property(r => r.Id).HasColumnName("Id");
-            e.Property(r => r.Keyword).HasColumnName("PalavraChave");
-            e.Property(r => r.Who).HasColumnName("Responsavel").HasConversion<int>();
-            e.Property(r => r.CreatedAt).HasColumnName("CriadoEm");
+            e.Property(r => r.PalavraChave).HasColumnName("PalavraChave");
+            e.Property(r => r.Responsavel).HasColumnName("Responsavel").HasConversion<int>();
+            e.Property(r => r.CriadoEm).HasColumnName("CriadoEm");
         });
 
-        modelBuilder.Entity<BoletoCategory>(e =>
+        modelBuilder.Entity<CategoriaBoleto>(e =>
         {
             e.ToTable("CategoriasBoleto");
             e.Property(b => b.Id).HasColumnName("Id");
-            e.Property(b => b.Name).HasColumnName("Nome");
-            e.Property(b => b.CreatedAt).HasColumnName("CriadoEm");
+            e.Property(b => b.Nome).HasColumnName("Nome");
+            e.Property(b => b.CriadoEm).HasColumnName("CriadoEm");
         });
 
         modelBuilder.Entity<Boleto>(e =>
         {
             e.ToTable("Boletos");
             e.Property(b => b.Id).HasColumnName("Id");
-            e.Property(b => b.MonthId).HasColumnName("MesId");
-            e.Property(b => b.Name).HasColumnName("Nome");
-            e.Property(b => b.Amount).HasColumnName("Valor").HasPrecision(18, 2);
-            e.Property(b => b.Who).HasColumnName("Responsavel").HasConversion<int>();
-            e.Property(b => b.CreatedAt).HasColumnName("CriadoEm");
-            e.HasOne<Month>()
+            e.Property(b => b.MesId).HasColumnName("MesId");
+            e.Property(b => b.Nome).HasColumnName("Nome");
+            e.Property(b => b.Valor).HasColumnName("Valor").HasPrecision(18, 2);
+            e.Property(b => b.Responsavel).HasColumnName("Responsavel").HasConversion<int>();
+            e.Property(b => b.CriadoEm).HasColumnName("CriadoEm");
+            e.HasOne<Mes>()
                 .WithMany()
-                .HasForeignKey(b => b.MonthId);
+                .HasForeignKey(b => b.MesId);
         });
     }
 }

@@ -5,10 +5,10 @@ namespace ProjetoFinanceiro.Application.Data;
 
 public interface IFinanceiroDbContext
 {
-    DbSet<Month> Months { get; }
-    DbSet<Transaction> Transactions { get; }
-    DbSet<Rule> Rules { get; }
-    DbSet<BoletoCategory> BoletoCategories { get; }
+    DbSet<Mes> Meses { get; }
+    DbSet<Transacao> Transacoes { get; }
+    DbSet<Regra> Regras { get; }
+    DbSet<CategoriaBoleto> CategoriasBoleto { get; }
     DbSet<Boleto> Boletos { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

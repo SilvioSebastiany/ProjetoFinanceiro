@@ -18,41 +18,41 @@ public class TransacoesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetByMes(Guid mesId, CancellationToken cancellationToken)
+    public async Task<IActionResult> BuscarPorMes(Guid mesId, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetTransactionsByMonthQuery(mesId), cancellationToken);
-        return Ok(result);
+        var resultado = await _mediator.Send(new BuscarTransacoesPorMesQuery(mesId), cancellationToken);
+        return Ok(resultado);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(Guid mesId, CreateTransactionCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Criar(Guid mesId, CriarTransacaoCommand command, CancellationToken cancellationToken)
     {
-        var commandWithMes = command with { MonthId = mesId };
-        var result = await _mediator.Send(commandWithMes, cancellationToken);
-        return CreatedAtAction(nameof(GetByMes), new { mesId = result.MonthId }, result);
+        var commandComMes = command with { MesId = mesId };
+        var resultado = await _mediator.Send(commandComMes, cancellationToken);
+        return CreatedAtAction(nameof(BuscarPorMes), new { mesId = resultado.MesId }, resultado);
     }
 
-    [HttpPost("bulk")]
-    public async Task<IActionResult> CreateBulk(Guid mesId, CreateTransactionsBulkCommand command, CancellationToken cancellationToken)
+    [HttpPost("lote")]
+    public async Task<IActionResult> CriarEmLote(Guid mesId, CriarTransacoesEmLoteCommand command, CancellationToken cancellationToken)
     {
-        var commandWithMes = command with { MonthId = mesId };
-        var result = await _mediator.Send(commandWithMes, cancellationToken);
-        return Ok(result);
+        var commandComMes = command with { MesId = mesId };
+        var resultado = await _mediator.Send(commandComMes, cancellationToken);
+        return Ok(resultado);
     }
 
     [HttpPatch("{id:guid}")]
-    public async Task<IActionResult> PatchWho(Guid mesId, Guid id, [FromBody] PatchTransactionWhoRequest body, CancellationToken cancellationToken)
+    public async Task<IActionResult> AtualizarResponsavel(Guid mesId, Guid id, [FromBody] AtualizarResponsavelRequest body, CancellationToken cancellationToken)
     {
-        var found = await _mediator.Send(new PatchTransactionWhoCommand(id, body.Who), cancellationToken);
-        return found ? NoContent() : NotFound();
+        var encontrado = await _mediator.Send(new AtualizarResponsavelTransacaoCommand(id, body.Responsavel), cancellationToken);
+        return encontrado ? NoContent() : NotFound();
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteByCardOwner(Guid mesId, [FromQuery] CardOwnerType cardOwner, CancellationToken cancellationToken)
+    public async Task<IActionResult> ExcluirPorDono(Guid mesId, [FromQuery] TipoDono dono, CancellationToken cancellationToken)
     {
-        await _mediator.Send(new DeleteTransactionsByCardOwnerCommand(mesId, cardOwner), cancellationToken);
+        await _mediator.Send(new ExcluirTransacoesPorDonoCommand(mesId, dono), cancellationToken);
         return NoContent();
     }
 }
 
-public record PatchTransactionWhoRequest(WhoType Who);
+public record AtualizarResponsavelRequest(TipoResponsavel Responsavel);

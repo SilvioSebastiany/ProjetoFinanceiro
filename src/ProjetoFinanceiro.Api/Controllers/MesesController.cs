@@ -17,16 +17,16 @@ public class MesesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken cancellationToken)
+    public async Task<IActionResult> BuscarTodos(CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new GetMonthsQuery(), cancellationToken);
-        return Ok(result);
+        var resultado = await _mediator.Send(new BuscarMesesQuery(), cancellationToken);
+        return Ok(resultado);
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateMonthCommand command, CancellationToken cancellationToken)
+    public async Task<IActionResult> Criar(CriarMesCommand command, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(command, cancellationToken);
-        return CreatedAtAction(nameof(GetAll), new { id = result.Id }, result);
+        var resultado = await _mediator.Send(command, cancellationToken);
+        return CreatedAtAction(nameof(BuscarTodos), new { id = resultado.Id }, resultado);
     }
 }

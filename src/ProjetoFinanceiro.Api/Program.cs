@@ -23,7 +23,7 @@ builder.Services.AddScoped<IFinanceiroDbContext>(sp =>
     sp.GetRequiredService<FinanceiroDbContext>());
 
 builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(typeof(CreateMonthCommandHandler).Assembly));
+    cfg.RegisterServicesFromAssembly(typeof(CriarMesCommandHandler).Assembly));
 
 var app = builder.Build();
 
@@ -34,7 +34,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors();
-app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
